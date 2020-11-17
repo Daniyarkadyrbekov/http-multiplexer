@@ -14,10 +14,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func init() {
-
-}
-
 func TestSimpleRequest(t *testing.T) {
 	jsonUrls := `
 [

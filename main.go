@@ -50,7 +50,6 @@ func multiplexer(w http.ResponseWriter, req *http.Request) {
 	pool := make(chan struct{}, MaxConcurrentSubRequests)
 	wg := &sync.WaitGroup{}
 
-	res := make(map[string]string, 0)
 	for _, url := range urls {
 		// In production could use redis or memcached to check already requested urls
 		wg.Add(1)
@@ -62,6 +61,7 @@ func multiplexer(w http.ResponseWriter, req *http.Request) {
 		close(ch)
 	}()
 
+	res := make(map[string]string, 0)
 	for result := range ch {
 
 		if result.err != nil {
